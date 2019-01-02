@@ -37,7 +37,7 @@ namespace WPF.MDI
 		/// <returns>The identifier for the WPF.MDI.MdiContainer.Theme property.</returns>
 		public static readonly DependencyProperty ThemeProperty =
 			DependencyProperty.Register("Theme", typeof(ThemeType), typeof(MdiContainer),
-			new UIPropertyMetadata(ThemeType.Aero, new PropertyChangedCallback(ThemeValueChanged)));
+			new UIPropertyMetadata(ThemeType.Generic, new PropertyChangedCallback(ThemeValueChanged)));
 
 		/// <summary>
 		/// Identifies the WPF.MDI.MdiContainer.Menu dependency property.
@@ -209,12 +209,17 @@ namespace WPF.MDI
 			Grid.SetRow(sv, 1);
 			Content = gr;
 
-			if (Environment.OSVersion.Version.Major > 5)
-				ThemeValueChanged(this, new DependencyPropertyChangedEventArgs(ThemeProperty, Theme, ThemeType.Aero));
-			else
-				ThemeValueChanged(this, new DependencyPropertyChangedEventArgs(ThemeProperty, Theme, ThemeType.Luna));
+            if (Theme == ThemeType.Generic)
+            {
+                if (Environment.OSVersion.Version.Major > 5 && Environment.OSVersion.Version.Minor > 1)
+                    ThemeValueChanged(this, new DependencyPropertyChangedEventArgs(ThemeProperty, Theme, ThemeType.Windows10));
+                else if (Environment.OSVersion.Version.Major > 5)
+                    ThemeValueChanged(this, new DependencyPropertyChangedEventArgs(ThemeProperty, Theme, ThemeType.Aero));
+                else
+                    ThemeValueChanged(this, new DependencyPropertyChangedEventArgs(ThemeProperty, Theme, ThemeType.Luna));
+            }
 
-			Loaded += MdiContainer_Loaded;
+            Loaded += MdiContainer_Loaded;
 			SizeChanged += MdiContainer_SizeChanged;
 			KeyDown += new System.Windows.Input.KeyEventHandler(MdiContainer_KeyDown);
 		}
@@ -449,7 +454,10 @@ namespace WPF.MDI
 				case ThemeType.Aero:
 					Application.Current.Resources.MergedDictionaries.Add(currentResourceDictionary = new ResourceDictionary { Source = new Uri(@"/WPF.MDI;component/Themes/Aero.xaml", UriKind.Relative) });
 					break;
-			}
+                case ThemeType.Windows10:
+                    Application.Current.Resources.MergedDictionaries.Add(currentResourceDictionary = new ResourceDictionary { Source = new Uri(@"/WPF.MDI;component/Themes/Windows10.xaml", UriKind.Relative) });
+                    break;
+            }
 
 			//if (max_mode)
 			//    mdiContainer.ActiveMdiChild.WindowState = WindowState.Maximized;
