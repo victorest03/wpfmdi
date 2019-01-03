@@ -247,7 +247,7 @@
                 <ControlTemplate TargetType="{x:Type local:MdiChild}">
                     <Grid>
                         <!--With .NET 4.5 is possible use: BorderBrush="{DynamicResource {x:Static SystemParameters.WindowGlassBrush}}" to get dymamic accent color-->
-                        <Border Margin="6,0,6,6" Name="BaseBorder" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderThickness="1" BorderBrush="Black">
+                        <Border Margin="0" Name="BaseBorder" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderThickness="1" BorderBrush="Black">
                             <Border.Effect>
                                 <DropShadowEffect x:Name="BaseBorderShadow" Opacity="0.4" BlurRadius="25" Direction="-45" RenderingBias="Performance" ShadowDepth="4"/>
                             </Border.Effect>

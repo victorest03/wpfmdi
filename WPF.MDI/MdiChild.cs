@@ -1015,8 +1015,8 @@ namespace WPF.MDI
 						mdiChild.Height = mdiContainer.InnerHeight - 2; // ContentBorder.BorderThickness="1" in template
 
 						ScrollViewer sv = (ScrollViewer)((Grid)mdiContainer.Content).Children[1];
-						sv.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-						sv.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+						sv.HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
+						sv.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
 					}
 					break;
 			}

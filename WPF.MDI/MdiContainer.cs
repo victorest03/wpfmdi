@@ -1,17 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
-using System.Collections.Generic;
-using System.Windows.Input;
-using System.Windows.Data;
 
 namespace WPF.MDI
 {
-	[ContentProperty("Children")]
+    [ContentProperty("Children")]
 	public class MdiContainer : UserControl
 	{
 		#region Constants
